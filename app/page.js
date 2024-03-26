@@ -1,4 +1,4 @@
-import Image from "next/image";
+import parse from 'html-react-parser';
 
 async function ArticleBody({ name }) {
   const apiUrl = `https://en.wikipedia.org/w/api.php?action=parse&format=json&page=${name}&formatversion=2`;
@@ -6,25 +6,21 @@ async function ArticleBody({ name }) {
   let rawPage;
 
   await fetch(apiUrl)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          return response.json();
-      })
-      .then(data => {
-          console.log(data.parse.text);
-          rawPage = data.parse.text;
-      })
-      .catch(error => {
-          console.error('Error:', error);
-      });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data.parse.text);
+        rawPage = data.parse.text;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 
-  return (
-    <div>
-      {JSON.stringify(rawPage)}
-    </div>
-  );
+  return ( parse(rawPage) );
 }
 
 export default function Home() {
