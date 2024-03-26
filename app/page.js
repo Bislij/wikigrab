@@ -20,9 +20,7 @@ async function ArticleBody({ name }) {
           console.error('Error:', error);
       });
 
-  return (
-    {rawPage}
-  );
+  return [rawPage];
 }
 
 export default function Home() {
