@@ -20,7 +20,11 @@ async function ArticleBody({ name }) {
           console.error('Error:', error);
       });
 
-  return [rawPage];
+  return (
+    <div>
+      {JSON.stringify(rawPage)}
+    </div>
+  );
 }
 
 export default function Home() {
